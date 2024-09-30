@@ -1,0 +1,69 @@
+<div class="container">
+  <h1>Tarea</h1>
+  <form class="container__form" autocomplete="off" [formGroup]="form">
+    <div class="form-item">
+      <input
+        id="name"
+        type="text"
+        class="form-item__input"
+        required=""
+        placeholder=""
+        formControlName="task"
+      />
+      <label class="form-item__label" for="name">Nombre de la tarea</label>
+      <span
+        class="form-item__error"
+        *ngIf="formControlError(form.controls.task, 'required')"
+        >Este campo es requerido</span
+      >
+    </div>
+
+    <div class="form-item">
+      <input
+        id="deadline"
+        type="date"
+        class="form-item__input"
+        required=""
+        placeholder=""
+        formControlName="deadline"
+      />
+      <label class="form-item__label" for="deadline">Fecha limite</label>
+      <span
+        class="form-item__error"
+        *ngIf="formControlError(form.controls.deadline, 'required')"
+        >Este campo es requerido</span
+      >
+    </div>
+
+    <app-add-person
+      (clickAddPerson)="addPerson()"
+      [resetFormFlag]="resetFormFlag"
+      formControlName="associatedPerson"
+    />
+
+    <section>
+      <table class="table">
+        <tr>
+          <th>Nombres</th>
+          <th>Edad</th>
+          <th>Habilidades</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let item of personsField.controls; let i = index">
+          <td>{{ item.get("fullName")?.value }}</td>
+          <td>{{ item.get("age")?.value }}</td>
+          <td>{{ item.get("skills")?.value }}</td>
+          <td><button (click)="deletePerson(i)">eliminar persona</button></td>
+        </tr>
+      </table>
+    </section>
+
+    <button
+      class="container__button-save"
+      [disabled]="form.invalid"
+      (click)="save()"
+    >
+      Guardar
+    </button>
+  </form>
+</div>

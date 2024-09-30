@@ -1,0 +1,93 @@
+<div class="container-person" [formGroup]="form">
+  <h3 class="container-person__title">Personas Asociadas</h3>
+  <section class="persons">
+    <form class="persons__form">
+      <div class="form-item">
+        <input
+          id="fullName"
+          type="text"
+          class="form-item__input"
+          required=""
+          placeholder=""
+          formControlName="fullName"
+          (change)="propagateChange(form.getRawValue())"
+        />
+        <label class="form-item__label" for="fullName">Nombre completo</label>
+        <span
+          class="form-item__error"
+          *ngIf="formControlError(form.controls.fullName, 'required')"
+          >Este campo es requerido</span
+        >
+        <span
+          class="form-item__error"
+          *ngIf="formControlError(form.controls.fullName, 'minlength')"
+          >mínimo 5 caracteres</span
+        >
+      </div>
+
+      <div class="form-item">
+        <input
+          id="age"
+          type="number"
+          min="1"
+          class="form-item__input"
+          required=""
+          placeholder=""
+          formControlName="age"
+          (change)="propagateChange(form.getRawValue())"
+        />
+        <label class="form-item__label" for="age">Edad</label>
+        <span
+          class="form-item__error"
+          *ngIf="formControlError(form.controls.age, 'required')"
+          >Este campo es requerido</span
+        >
+
+        <span
+          class="form-item__error"
+          *ngIf="formControlError(form.controls.age, 'min')"
+          >La edad debe ser mayor o igual a 18</span
+        >
+      </div>
+    </form>
+
+    <div class="skills">
+      <div class="skills-title">
+        <h5 class="skills__title">Habilidades</h5>
+        <button (click)="addSkill()">agregar</button>
+      </div>
+
+      <table class="table" formArrayName="skills">
+        <tr>
+          <th>Descripción</th>
+          <th></th>
+        </tr>
+
+        <tr
+          *ngFor="let item of skillsField.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <td>
+            <div class="form-item">
+              <input
+                id="id_{{ i }}"
+                type="text"
+                class="form-item__input"
+                required=""
+                placeholder=""
+                [formControl]="item"
+                (change)="propagateChange(form.getRawValue())"
+              />
+              <label class="form-item__label" for="id_{{ i }}">Habilidad</label>
+            </div>
+          </td>
+          <td><button (click)="removeSkill(i)">quitar</button></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <button (click)="addPerson()" [disabled]="form.invalid">
+    {{ isEdit ? "Guardar cambios" : "Añadir Persona" }}
+  </button>
+</div>

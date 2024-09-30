@@ -1,0 +1,79 @@
+<div class="container-tasks">
+  <h1>Lista de tareas</h1>
+
+  <div class="filters">
+    <div>
+      <label>
+        <input
+          type="radio"
+          name="radio"
+          value="todas"
+          (change)="onRadioChange($event)"
+          checked
+        />
+        <span>Todas</span>
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="radio"
+          value="completadas"
+          (change)="onRadioChange($event)"
+        />
+        <span>Completadas</span>
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="radio"
+          value="pendientes"
+          (change)="onRadioChange($event)"
+        />
+        <span>Pendientes</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="container-card">
+    <section class="card" *ngFor="let item of listTask; let indexTask = index">
+      <h3>{{ item.task.task }} - {{ item.task.deadline }}</h3>
+      <input
+        type="checkbox"
+        name="status"
+        #check
+        [(ngModel)]="item.complete"
+      />{{ check.checked ? "Completado" : "Pendiente" }}
+
+      <h4>Personas Asociadas</h4>
+      <button (click)="addPerson(indexTask)">Agregar persona</button>
+      <br />
+      <br />
+
+      <table class="table">
+        <tr>
+          <th>Nombres</th>
+          <th>Edad</th>
+          <th>Habilidades</th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let person of item.task.persons; let indexPerson = index">
+          <td>{{ person.fullName }}</td>
+          <td>{{ person.age }}</td>
+          <td>
+            <span class="skills">
+              {{ person.skills }}
+            </span>
+          </td>
+          <td>
+            <div class="card__action">
+              <button>quitar</button>
+              <button (click)="editPerson(indexTask, indexPerson, person)">
+                editar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </div>
+</div>

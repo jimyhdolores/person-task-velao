@@ -1,1 +1,126 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+  font-size: 12px;
+  td,
+  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  td {
+    word-wrap: break-word; /* Permite que las palabras se ajusten */
+    overflow-wrap: break-word; /* Equivalente moderno */
+    white-space: normal; /* Asegura que el texto se divida en varias líneas */
+  }
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04aa6d;
+    color: white;
+  }
+}
+
+.form-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  &__error {
+    font-size: 12px;
+    color: red;
+  }
+  &__label {
+    font-size: 12px;
+    color: rgb(99, 102, 102);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+  }
+
+  &__input,
+  &__textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: 0;
+    background-color: transparent;
+  }
+
+  &__input:placeholder-shown + &__label,
+  &__textarea:placeholder-shown + &__label {
+    top: 10px;
+    background-color: transparent;
+  }
+
+  &__input:focus,
+  &__textarea:focus {
+    border-color: #3366cc;
+  }
+
+  &__input:focus + &__label,
+  &__textarea:focus + &__label {
+    top: -10px;
+    left: 10px;
+    background-color: #fff;
+    color: #3366cc;
+    font-weight: 600;
+    font-size: 13px;
+  }
+
+  &__textarea {
+    resize: none;
+    height: 100px;
+  }
+}
+
+button {
+  background-color: #00bcd4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background-color: #2196f3;
+  transform: translateY(-2px);
+}
+
+button:active {
+  background-color: #2196f3;
+  transform: translateY(0);
+}
+
+button:focus {
+  outline-offset: 2px;
+}
+
+button:disabled {
+  background-color: #999999;
+}
