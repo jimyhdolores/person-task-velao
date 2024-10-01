@@ -17,8 +17,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AssociatedPerson } from '../models/task.interface';
-import { atLeastOneControlFilled } from '../validators/form.validators';
+import { AssociatedPerson } from '../../models/task.interface';
+import { atLeastOneControlFilled } from '../../validators/form.validators';
 
 @Component({
   selector: 'app-add-person',
@@ -52,7 +52,7 @@ export class AddPersonComponent implements ControlValueAccessor, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['resetFormFlag'] && changes['resetFormFlag'].currentValue) {
-      this.form.controls.skills.reset();
+      this.form.controls.skills.clear();
     }
   }
 
@@ -74,6 +74,8 @@ export class AddPersonComponent implements ControlValueAccessor, OnChanges {
     }
 
     this.clickAddPerson.emit(this.form.getRawValue());
+    this.form.controls.skills.clear();
+    this.form.reset();
   }
 
   writeValue(value: AssociatedPerson): void {

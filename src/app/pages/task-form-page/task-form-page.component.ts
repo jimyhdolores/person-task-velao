@@ -7,11 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AddPersonComponent } from '../add-person/add-person.component';
-import { PersonForm } from '../models/form';
-import { AssociatedPerson } from '../models/task.interface';
-import { TasksService } from '../services/tasks.service';
-import { atLeastOneControlFilled } from '../validators/form.validators';
+import { AddPersonComponent } from '../../components/add-person/add-person.component';
+import { PersonForm } from '../../models/form';
+import { AssociatedPerson } from '../../models/task.interface';
+import { TasksService } from '../../services/tasks.service';
+import { atLeastOneControlFilled } from '../../validators/form.validators';
 
 @Component({
   selector: 'app-task-form-page',
@@ -43,6 +43,7 @@ export default class TaskFormPageComponent {
     const { task, deadline, persons } = this.form.getRawValue();
     this._tasksService.addTask({ task, deadline, persons });
     this.resetFormFlag = true;
+    this.personsField.clear();
     this.form.reset();
   }
 

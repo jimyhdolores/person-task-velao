@@ -66,7 +66,9 @@
           </td>
           <td>
             <div class="card__action">
-              <button>quitar</button>
+              <button (click)="removePerson(indexTask, indexPerson)">
+                quitar
+              </button>
               <button (click)="editPerson(indexTask, indexPerson, person)">
                 editar
               </button>

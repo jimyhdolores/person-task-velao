@@ -3,9 +3,8 @@ import {
   ComponentRef,
   createComponent,
   Injectable,
-  Injector,
 } from '@angular/core';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../components/modal/modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +12,9 @@ import { ModalComponent } from '../modal/modal.component';
 export class ModalService {
   private modalComponentRef?: ComponentRef<ModalComponent>;
 
-  constructor(private injector: Injector, private appRef: ApplicationRef) {}
+  constructor(private appRef: ApplicationRef) {}
 
   open<T>(component: any): ComponentRef<T> {
-    // Crear el contenedor del modal
     if (!this.modalComponentRef) {
       const modalComponent = createComponent(ModalComponent, {
         environmentInjector: this.appRef.injector,
@@ -27,7 +25,6 @@ export class ModalService {
       this.modalComponentRef = modalComponent;
     }
 
-    // Establecer el componente dinámico que se mostrará en el modal
     const componentRef =
       this.modalComponentRef.instance.loadComponent<T>(component);
     return componentRef;

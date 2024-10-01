@@ -10,8 +10,6 @@ export class TasksService {
   }
 
   getTasks() {
-    console.log('--');
-
     return this._tasks;
   }
 }

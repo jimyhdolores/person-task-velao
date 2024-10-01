@@ -1,10 +1,10 @@
 import { NgFor } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AddPersonComponent } from '../add-person/add-person.component';
-import { AssociatedPerson, IAdminTask } from '../models/task.interface';
-import { ModalService } from '../services/modal.service';
-import { TasksService } from '../services/tasks.service';
+import { AddPersonComponent } from '../../components/add-person/add-person.component';
+import { AssociatedPerson, IAdminTask } from '../../models/task.interface';
+import { ModalService } from '../../services/modal.service';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-list-task-page',
@@ -49,6 +49,10 @@ export class ListTaskPageComponent implements OnInit {
         this._modalService.close();
       });
     }
+  }
+
+  removePerson(indexTask: number, indexPerson: number) {
+    this.listTask[indexTask].task.persons.splice(indexPerson, 1);
   }
 
   onRadioChange(selectedValue: Event) {
